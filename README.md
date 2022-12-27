@@ -1,7 +1,7 @@
 # Conway-Game-of-Life-but-multiplayer
 A Conway's Game of Life implementation that run in your terminal and allow for WAN multiplayer
 
-To run the revised Game of Life program, first start the server by opening a terminal and navigating to the directory where the server script is saved. Then, run the following command:
+To run the Game of Life program, first start the server by opening a terminal and navigating to the directory where the server script is saved. Then, run the following command:
 
 ```python filename.py ip port n num_cells x1,y1 x2,y2 ...```
 
