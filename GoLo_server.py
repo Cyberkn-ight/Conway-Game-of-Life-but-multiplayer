@@ -60,7 +60,7 @@ while True:
                 grid[i][j] = 0
 
     # Send the updated grid to the client
-client_socket.send(bytes(f"{n}\n" + '\n'.join([' '.join(map(str, row)) for row in grid]) + "\n", "utf-8"))
+    client_socket.send(bytes(f"{n}\n" + '\n'.join([' '.join(map(str, row)) for row in grid]) + "\n", "utf-8"))
 
 # Close the socket
 client_socket.close()
