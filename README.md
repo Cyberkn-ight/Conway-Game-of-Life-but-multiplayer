@@ -1,16 +1,31 @@
 # Conway-Game-of-Life-but-multiplayer
 A Conway's Game of Life implementation that run in your terminal and allow for WAN multiplayer
 
-To run the Game of Life program, first start the server by opening a terminal and navigating to the directory where the server script is saved. Then, run the following command:
+#Playing the Game of Life with the Revised Server and Client Scripts
 
-```python filename.py ip port n num_cells x1,y1 x2,y2 ...```
+To play the Game of Life with the revised server and client scripts, you will need to follow these steps:
 
-Replace "filename.py" with the actual name of the server script file, "ip" with the IP address that the server will bind to, "port" with the port number that the server will listen on, "n" with the size of the grid, "num_cells" with the number of initial live cells, and "x1,y1 x2,y2 ..." with the starting positions of the cells (each pair of coordinates should be separated by a space).
+## - Starting the Server
+Run the following command in the terminal to start the server:
 
-Then, open another terminal and navigate to the directory where the client script is saved. Run the following command:
+```python server.py [IP] [port] [grid size] [number of initial cells] [cell 1] [cell 2] ... [cell N]```
 
-```python filename.py ip port```
+- 'IP' is the IP address of the server. You can use localhost if you are running the server and client on the same machine.
+- 'port' is the port number that the server will listen on. You can choose any available port number.
+- 'grid' size is the size of the grid (number of rows and columns).
+- 'number' of initial cells is the number of cells that will be present in the initial grid.
+- 'cell 1' to cell N are the coordinates of the initial cells, in the form x,y.
 
-Replace "filename.py" with the actual name of the client script file, "ip" with the IP address of the server, and "port" with the port number of the server.
+## Starting the Client
 
-This will start the client and connect it to the server. The client will then prompt the user to enter a move (in the form "x,y") or pause the game by entering 'p'.
+Run the following command in the terminal to start the client:
+
+```python client.py [IP] [port]```
+
+- 'IP' is the IP address of the server that the client will connect to.
+- 'port' is the port number that the server is listening on.
+
+## Playing the Game
+- 1: The client will receive the initial grid from the server and print it to the terminal.
+- 2: You can pause the game by pressing the space bar. The game will resume when you press the space bar again.
+- 3: You can also place a cell by pressing the 'e' key and entering the coordinates (x,y) of the cell you want to place.
