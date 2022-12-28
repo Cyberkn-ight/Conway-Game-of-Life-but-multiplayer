@@ -6,11 +6,11 @@ ip = sys.argv[1]
 port = int(sys.argv[2])
 n = int(sys.argv[3])
 num_cells = int(sys.argv[4])
-cells = [(int(x), int(y)) for x, y in (arg.split(',') for arg in sys.argv[5:])]
+positions = [(int(x), int(y)) for x, y in (coord.split(',') for coord in sys.argv[5:])]
 
-# Initialize the grid and set the initial live cells
+# Initialize the grid with the given number of cells
 grid = [[0 for _ in range(n)] for _ in range(n)]
-for x, y in cells:
+for x, y in positions:
     grid[x][y] = 1
 
 # Set up the server socket
@@ -18,8 +18,11 @@ server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((ip, port))
 server_socket.listen()
 
-# Accept a connection from a client
+# Accept a connection from the client
 client_socket, _ = server_socket.accept()
+
+# Send the initial grid to the client
+client_socket.send(bytes(f"{n}\n" + '\n'.join([' '.join(map(str, row)) for row in grid]) + "\n", "utf-8"))
 
 # Iterate through the grid and apply the rules of the Game of Life
 while True:
@@ -27,6 +30,8 @@ while True:
     move = client_socket.recv(1024).decode()
     if not move:
         break
+
+    # Update the grid
     x, y = map(int, move.split(','))
     grid[x][y] = 1
 
@@ -59,9 +64,9 @@ while True:
             elif grid[i][j] == 1 and (neighbors[i][j] < 2 or neighbors[i][j] > 3):
                 grid[i][j] = 0
 
-    # Send the updated grid to the client
-    client_socket.send(bytes(f"{n}\n" + '\n'.join([' '.join(map(str, row)) for row in grid]) + "\n", "utf-8"))
+# Send the updated grid to the client
+    client_socket.send(bytes('\n'.join([' '.join(map(str, row)) for row in grid]) + "\n", "utf-8"))
 
-# Close the socket
+# Close the sockets
 client_socket.close()
 server_socket.close()
