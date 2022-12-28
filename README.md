@@ -1,7 +1,7 @@
 # Conway-Game-of-Life-but-multiplayer
 A Conway's Game of Life implementation that run in your terminal and allow for WAN multiplayer
 
-#Playing the Game of Life with the Revised Server and Client Scripts
+# Playing the Game of Life with the Revised Server and Client Scripts
 
 To play the Game of Life with the revised server and client scripts, you will need to follow these steps:
 
